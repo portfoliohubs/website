@@ -739,7 +739,7 @@
                 <p class="hero-description" data-en="{{ .Site.Params.clinic.description }}" data-ar="{{ .Site.Params.ar.clinic.description }}">{{ .Site.Params.clinic.description }}</p>
                 
                 <div class="hero-cta">
-                    <a href="https://wa.me/{{ replaceRE '\\+' '' .Site.Params.contact.whatsapp }}" class="btn btn-whatsapp" data-en="{{ .Site.Params.ui.hero.cta_book }}" data-ar="{{ .Site.Params.ar.ui.hero.cta_book }}">
+                    <a href="https://wa.me/{{ .Site.Params.contact.whatsapp | replaceRE \"\\+\" \"\" }}" class="btn btn-whatsapp" data-en="{{ .Site.Params.ui.hero.cta_book }}" data-ar="{{ .Site.Params.ar.ui.hero.cta_book }}">
                         <i class="fab fa-whatsapp"></i>
                         <span>{{ .Site.Params.ui.hero.cta_book }}</span>
                     </a>
@@ -829,7 +829,7 @@
                 {{ range .Site.Params.testimonials.items }}
                 <article class="testimonial-card">
                     <div class="testimonial-rating">
-                        {{ range seq .rating }}<i class="fas fa-star"></i>{{ end }}
+                        {{ $rating := .rating }}{{ range seq $rating }}<i class="fas fa-star"></i>{{ end }}
                     </div>
                     <p class="testimonial-text" data-en="{{ .text }}" data-ar="{{ .text_ar }}">{{ .text }}</p>
                     <div class="testimonial-author" data-en="{{ .name }}" data-ar="{{ .name_ar }}">{{ .name }}</div>
@@ -958,7 +958,7 @@
     </footer>
 
     <!-- WhatsApp Floating Button -->
-    <a href="https://wa.me/{{ replaceRE '\\+' '' .Site.Params.contact.whatsapp }}" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/{{ .Site.Params.contact.whatsapp | replaceRE \"\\+\" \"\" }}" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
         <i class="fab fa-whatsapp"></i>
     </a>
 

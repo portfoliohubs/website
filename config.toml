@@ -70,14 +70,20 @@ title = "Dr. Remonda Malak Dental Clinic"
   [params.seo]
     # Primary Meta
     description = "Dr. Remonda Malak Dental Clinic in Zagazig offers professional dental services including cosmetic dentistry, teeth whitening, dental implants, root canal treatment, and emergency dental care. Book online or call +201270014506."
-    description_ar = "عيادة د. ريموندا ملاك لطب الأسنان في الزقازيق تقدم خدمات أسنان احترافية تشمل طب الأسنان التجميلي، تبييض الأسنان، زراعة الأسنان، علاج الجذور، ورعاية الأسنان الطارئة. احجز أونلاين أو اتصل على +201270014506."
+    description_ar = "عيادة د. ريموندا ملاك لطب الأسنان في الزقازيق تقدم خدمات أسنان احترافية تشمل طب الأسنان التجميلي، تبييض الأسنان، زراعة الأسنان، علاج الجذور، ورعاية الأسنان الطارئة. احجز أونلاكين أو اتصل على +201270014506."
     doctor_name_en = "Dr. Remonda Malak"
     doctor_name_ar = "د. ريموندا ملاك"
     site_name = "Dr. Remonda Malak Dental Clinic"
     og_image = ""
     og_image_alt = "Dr. Remonda Malak Dental Clinic - Zagazig"
     favicon_image = ""
+    favicon_svg = ""
+    apple_touch_icon = ""
     twitter_handle = ""
+    copyright = "© 2026 Dr. Remonda Malak Dental Clinic. All rights reserved."
+    robots = "index, follow"
+    googlebot = "index, follow"
+    bingbot = "index, follow"
     
     # English Keywords - Local SEO Focused
     keywords = [
