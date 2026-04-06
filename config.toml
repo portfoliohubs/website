@@ -1,8 +1,7 @@
-baseURL = "https://portfoliohubs.github.io/MICKY/"
+baseURL = "https://portfoliohubs.github.io/website/"
 defaultContentLanguage = "en"
 languageCode = "en-us"
 title = "Dr. Remonda Malak Dental Clinic"
-defaultContentLanguage = "en"
 
 [params]
   # ==========================================
