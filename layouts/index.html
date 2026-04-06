@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ $clinic := .Site.Params.clinic }}
+    {{ $doctor := .Site.Params.doctor }}
+    {{ $seo := .Site.Params.seo }}
+    {{ $siteName := $seo.site_name }}
+    {{ $desc := $seo.description }}
+    {{ $descAr := $seo.description_ar }}
+    {{ $kw := $seo.keywords }}
+    {{ $kwAr := $seo.keywords_ar }}
+    {{ $allKw := $kw }}
+    {{ range $kwAr }}{{ $allKw = $allKw | append . }}{{ end }}
+    {{ $keywords := delimit $allKw ", " }}
+    {{ $pageUrl := .Permalink }}
+    {{ $ogImage := $seo.og_image | default "" }}
+
+    <title>{{ $doctor.name }} - {{ $clinic.name }} | {{ $clinic.tagline }}</title>
+    <meta name="description" content="{{ $desc }}">
+    <meta name="keywords" content="{{ $keywords }}">
+    <meta name="author" content="{{ $doctor.name }}">
+    <meta name="copyright" content="{{ $seo.copyright }}">
+    <meta name="robots" content="{{ $seo.robots }}">
+    <meta name="googlebot" content="{{ $seo.googlebot }}">
+    <meta name="bingbot" content="{{ $seo.bingbot }}">
+    <link rel="canonical" href="{{ $pageUrl }}">
+    <meta name="theme-color" content="#2563eb">
+    
+    <!-- GEO Location Tags -->
+    <meta name="geo.region" content="{{ $seo.geo_region }}">
+    <meta name="geo.placename" content="{{ $seo.geo_placename }}">
+    <meta name="geo.position" content="{{ $seo.geo_position }}">
+    <meta name="ICBM" content="{{ $seo.icbm }}">
+    
+    <!-- Alternate Languages / Hreflang -->
+    <link rel="alternate" hreflang="en" href="{{ $pageUrl }}">
+    <link rel="alternate" hreflang="ar" href="{{ $pageUrl }}?lang=ar">
+    <link rel="alternate" hreflang="x-default" href="{{ $pageUrl }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="business.business">
+    <meta property="og:title" content="{{ $doctor.name }} - {{ $clinic.name }}">
+    <meta property="og:description" content="{{ $desc }}">
+    <meta property="og:url" content="{{ $pageUrl }}">
+    <meta property="og:site_name" content="{{ $siteName }}">
+    <meta property="og:image" content="{{ $ogImage | absURL }}">
+    <meta property="og:image:alt" content="{{ $seo.og_image_alt }}">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="ar_AR">
+    <meta property="business:contact_data:street_address" content="{{ $clinic.address.street }}">
+    <meta property="business:contact_data:locality" content="{{ $clinic.address.city }}">
+    <meta property="business:contact_data:region" content="{{ $clinic.address.region }}">
+    <meta property="business:contact_data:postal_code" content="{{ $clinic.address.postal_code }}">
+    <meta property="business:contact_data:country_name" content="{{ $clinic.address.country }}">
+    <meta property="place:location:latitude" content="{{ $clinic.geo.latitude }}">
+    <meta property="place:location:longitude" content="{{ $clinic.geo.longitude }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    {{ if $seo.twitter_handle }}<meta name="twitter:site" content="{{ $seo.twitter_handle }}">{{ end }}
+    <meta name="twitter:title" content="{{ $doctor.name }} - {{ $clinic.name }}">
+    <meta name="twitter:description" content="{{ $desc }}">
+    <meta name="twitter:image" content="{{ $ogImage | absURL }}">
+    
+    <!-- Favicon -->
+    {{ if $seo.favicon_image }}<link rel="icon" href="{{ $seo.favicon_image }}" sizes="any">{{ end }}
+    {{ if $seo.favicon_svg }}<link rel="icon" href="{{ $seo.favicon_svg }}" type="image/svg+xml">{{ end }}
+    {{ if $seo.apple_touch_icon }}<link rel="apple-touch-icon" href="{{ $seo.apple_touch_icon }}">{{ end }}
+    
+    <!-- Google Search Console -->
+    {{ with .Site.Params.integrations.google_search_console_verification }}
+    <meta name="google-site-verification" content="{{ . }}">
+    {{ end }}
+    
+    <!-- Google Analytics -->
+    {{ with .Site.Params.integrations.google_analytics_measurement_id }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '{{ . }}');
+    </script>
+    {{ end }}
+    
+    <!-- Schema.org Structured Data: LocalBusiness + Dentist -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["Dentist", "LocalBusiness"],
+        "name": "{{ $clinic.name }}",
+        "alternateName": "{{ $clinic.name_ar }}",
+        "description": "{{ $clinic.description }}",
+        "url": "{{ $pageUrl }}",
+        "logo": "{{ $ogImage | absURL }}",
+        "image": "{{ $ogImage | absURL }}",
+        "telephone": "{{ .Site.Params.contact.phone }}",
+        "email": "{{ .Site.Params.contact.email }}",
+        "priceRange": "{{ $clinic.price_range }}",
+        "foundingDate": "{{ $clinic.founding_date }}",
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": {{ $clinic.geo.latitude }},
+            "longitude": {{ $clinic.geo.longitude }}
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "{{ $clinic.address.street }}",
+            "addressLocality": "{{ $clinic.address.city }}",
+            "addressRegion": "{{ $clinic.address.region }}",
+            "postalCode": "{{ $clinic.address.postal_code }}",
+            "addressCountry": "{{ $clinic.address.country }}"
+        },
+        "openingHoursSpecification": [
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"], "opens": "09:00", "closes": "21:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": "Friday", "opens": "14:00", "closes": "20:00"},
+            {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "10:00", "closes": "18:00"}
+        ],
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "{{ $clinic.rating.rating_value }}",
+            "reviewCount": "{{ $clinic.rating.review_count }}"
+        },
+        "employee": {
+            "@type": "Person",
+            "name": "{{ $doctor.name }}",
+            "jobTitle": "{{ $doctor.title }}",
+            "description": "{{ $doctor.bio }}",
+            "sameAs": [
+                "{{ .Site.Params.contact.social.instagram | default "" }}",
+                "{{ .Site.Params.contact.social.facebook | default "" }}",
+                "{{ .Site.Params.contact.social.linkedin | default "" }}"
+            ]
+        },
+        "sameAs": [
+            "{{ .Site.Params.contact.social.instagram | default "" }}",
+            "{{ .Site.Params.contact.social.facebook | default "" }}"
+        ],
+        "paymentAccepted": "{{ delimit $clinic.payment_methods ", " }}",
+        "currenciesAccepted": "EGP"
+    }
+    </script>
+    
+    <!-- Schema.org: WebSite -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "{{ $siteName }}",
+        "url": "{{ .Site.BaseURL }}",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "{{ .Site.BaseURL }}?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #7c3aed;
+            --accent-color: #06b6d4;
+            --text-color: #1f2937;
+            --text-light: #6b7280;
+            --bg-color: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-color: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="dark"] {
+            --primary-color: #3b82f6;
+            --secondary-color: #8b5cf6;
+            --accent-color: #22d3ee;
+            --text-color: #f9fafb;
+            --text-light: #d1d5db;
+            --bg-color: #111827;
+            --bg-secondary: #1f2937;
+            --border-color: #374151;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+        body[dir="rtl"] { font-family: 'Segoe UI', Tahoma, Arial, sans-serif; }
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            display: none;
+        }
+        @media (max-width: 768px) { .menu-btn { display: block; } }
+        .header-logo { flex: 1; text-align: center; }
+        .header-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .header-controls { display: flex; gap: 0.5rem; }
+        .lang-toggle, .theme-toggle {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        .lang-toggle:hover, .theme-toggle:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--bg-color);
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+            z-index: 1001;
+            overflow-y: auto;
+        }
+        .mobile-nav.active { left: 0; }
+        body[dir="rtl"] .mobile-nav { left: auto; right: -100%; }
+        body[dir="rtl"] .mobile-nav.active { right: 0; }
+        .mobile-nav-content { padding: 2rem; }
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 0.5rem;
+            margin-bottom: 2rem;
+        }
+        .nav-links { list-style: none; }
+        .nav-links li { margin-bottom: 0.5rem; }
+        .nav-links a {
+            display: block;
+            padding: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        .main-container { margin-top: 70px; padding-bottom: 100px; }
+        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .icon-circle {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .section-subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-color) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero-welcome {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .hero-clinic-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        .hero-tagline {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+        }
+        .btn-secondary:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+        }
+        .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        /* Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .service-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: white;
+            font-size: 1.8rem;
+        }
+        .service-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .service-description {
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        /* Cases */
+        .cases-container { display: flex; flex-direction: column; gap: 3rem; }
+        .case-category {
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+        }
+        .case-category-title {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--primary-color);
+        }
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .case-card {
+            background: var(--bg-color);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        .case-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+        .case-image-wrapper { position: relative; padding-top: 70%; overflow: hidden; }
+        .case-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            background: var(--bg-secondary);
+        }
+        .case-description { padding: 1rem; text-align: center; font-size: 0.9rem; color: var(--text-light); }
+        /* Testimonials */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        .testimonial-card {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        .testimonial-rating {
+            color: #fbbf24;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            color: var(--text-color);
+        }
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+        .testimonial-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+        /* About */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        @media (max-width: 768px) { .about-content { grid-template-columns: 1fr; } }
+        .about-image {
+            width: 100%;
+            max-width: 300px;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-lg);
+        }
+        .about-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+        .about-credentials {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+        .about-bio {
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+        /* Contact */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        @media (max-width: 768px) { .contact-grid { grid-template-columns: 1fr; } }
+        .contact-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .contact-item i {
+            width: 40px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            flex-shrink: 0;
+        }
+        .contact-item a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .contact-item a:hover { text-decoration: underline; }
+        .hours-list {
+            list-style: none;
+        }
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .map-container {
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .map-container iframe { width: 100%; height: 300px; border: 0; }
+        /* Footer */
+        .footer {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .footer-nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .footer-nav a:hover { color: var(--primary-color); }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        .social-link:hover { transform: scale(1.1); }
+        .social-link.instagram { background: linear-gradient(135deg, #f58529, #dd2a7b); }
+        .social-link.facebook { background: #1877f2; }
+        .social-link.linkedin { background: #0a66c2; }
+        .footer-info {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            transition: var(--transition);
+            z-index: 998;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+        body[dir="rtl"] .whatsapp-float { right: auto; left: 30px; }
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-color);
+            z-index: 999;
+            display: flex;
+            justify-content: space-around;
+            padding: 0.5rem;
+        }
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            padding: 0.5rem 1rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: var(--transition);
+        }
+        .bottom-nav-item i { font-size: 1.2rem; }
+        .bottom-nav-item.active, .bottom-nav-item:hover { color: var(--primary-color); }
+        @media (max-width: 768px) {
+            .section { padding: 3rem 1rem; }
+            .section-title { font-size: 1.8rem; }
+            .hero-clinic-name { font-size: 1.8rem; }
+            .hero-tagline { font-size: 1.2rem; }
+            .hero-cta { flex-direction: column; }
+            .btn { width: 100%; justify-content: center; }
+            .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+            .cases-grid { grid-template-columns: 1fr; }
+            .whatsapp-float { bottom: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-content">
+            <button class="menu-btn" id="menuBtn" aria-label="Menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <div class="header-logo">
+                <h1 class="header-name" id="headerName" data-en="{{ .Site.Params.clinic.name }}" data-ar="{{ .Site.Params.ar.clinic.name }}">{{ .Site.Params.clinic.name }}</h1>
+            </div>
+            
+            <div class="header-controls">
+                <button class="lang-toggle" id="langToggle" aria-label="Toggle Language">
+                    <i class="fas fa-language"></i>
+                    <span class="lang-text">AR</span>
+                </button>
+                
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileNav">
+            <div class="mobile-nav-content">
+                <button class="close-btn" id="closeBtn" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <ul class="nav-links">
+                    <li><a href="#home" data-en="{{ .Site.Params.ui.nav.home }}" data-ar="{{ .Site.Params.ar.ui.nav.home }}">{{ .Site.Params.ui.nav.home }}</a></li>
+                    <li><a href="#services" data-en="{{ .Site.Params.ui.nav.services }}" data-ar="{{ .Site.Params.ar.ui.nav.services }}">{{ .Site.Params.ui.nav.services }}</a></li>
+                    <li><a href="#cases" data-en="{{ .Site.Params.ui.nav.cases }}" data-ar="{{ .Site.Params.ar.ui.nav.cases }}">{{ .Site.Params.ui.nav.cases }}</a></li>
+                    <li><a href="#testimonials" data-en="{{ .Site.Params.ui.nav.testimonials }}" data-ar="{{ .Site.Params.ar.ui.nav.testimonials }}">{{ .Site.Params.ui.nav.testimonials }}</a></li>
+                    <li><a href="#about" data-en="{{ .Site.Params.ui.nav.about }}" data-ar="{{ .Site.Params.ar.ui.nav.about }}">{{ .Site.Params.ui.nav.about }}</a></li>
+                    <li><a href="#contact" data-en="{{ .Site.Params.ui.nav.contact }}" data-ar="{{ .Site.Params.ar.ui.nav.contact }}">{{ .Site.Params.ui.nav.contact }}</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <p class="hero-welcome" data-en="{{ .Site.Params.ui.hero.welcome }}" data-ar="{{ .Site.Params.ar.ui.hero.welcome }}">{{ .Site.Params.ui.hero.welcome }}</p>
+                <h1 class="hero-clinic-name" data-en="{{ .Site.Params.clinic.name }}" data-ar="{{ .Site.Params.ar.clinic.name }}">{{ .Site.Params.clinic.name }}</h1>
+                <p class="hero-tagline" data-en="{{ .Site.Params.clinic.tagline }}" data-ar="{{ .Site.Params.ar.clinic.tagline }}">{{ .Site.Params.clinic.tagline }}</p>
+                <p class="hero-description" data-en="{{ .Site.Params.clinic.description }}" data-ar="{{ .Site.Params.ar.clinic.description }}">{{ .Site.Params.clinic.description }}</p>
+                
+                <div class="hero-cta">
+                    <a href="https://wa.me/{{ replace .Site.Params.contact.whatsapp '+' '' }}" class="btn btn-whatsapp" data-en="{{ .Site.Params.ui.hero.cta_book }}" data-ar="{{ .Site.Params.ar.ui.hero.cta_book }}">
+                        <i class="fab fa-whatsapp"></i>
+                        <span>{{ .Site.Params.ui.hero.cta_book }}</span>
+                    </a>
+                    <a href="#services" class="btn btn-secondary" data-en="{{ .Site.Params.ui.hero.cta_services }}" data-ar="{{ .Site.Params.ar.ui.hero.cta_services }}">
+                        <i class="fas fa-teeth"></i>
+                        <span>{{ .Site.Params.ui.hero.cta_services }}</span>
+                    </a>
+                    <a href="tel:{{ .Site.Params.contact.phone }}" class="btn btn-primary" data-en="{{ .Site.Params.ui.hero.cta_call }}" data-ar="{{ .Site.Params.ar.ui.hero.cta_call }}">
+                        <i class="fas fa-phone"></i>
+                        <span>{{ .Site.Params.ui.hero.cta_call }}</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="section-header">
+                <div class="icon-circle">
+                    <i class="fas fa-teeth"></i>
+                </div>
+                <h2 class="section-title" data-en="{{ .Site.Params.ui.services.title }}" data-ar="{{ .Site.Params.ar.ui.services.title }}">{{ .Site.Params.ui.services.title }}</h2>
+                <p class="section-subtitle" data-en="{{ .Site.Params.ui.services.subtitle }}" data-ar="{{ .Site.Params.ar.ui.services.subtitle }}">{{ .Site.Params.ui.services.subtitle }}</p>
+            </div>
+            
+            <div class="services-grid">
+                {{ range .Site.Params.services.list }}
+                <article class="service-card">
+                    <div class="service-icon">
+                        <i class="fas {{ .icon }}"></i>
+                    </div>
+                    <h3 class="service-title" data-en="{{ .title }}" data-ar="{{ .title_ar }}">{{ .title }}</h3>
+                    <p class="service-description" data-en="{{ .description }}" data-ar="{{ .description_ar }}">{{ .description }}</p>
+                    <div class="service-meta">
+                        <span><i class="fas fa-clock"></i> {{ .duration }}</span>
+                        <span><i class="fas fa-tag"></i> {{ .price_from }} EGP+</span>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+        </section>
+
+        <!-- Cases Section -->
+        <section id="cases" class="section">
+            <div class="section-header">
+                <div class="icon-circle">
+                    <i class="fas fa-images"></i>
+                </div>
+                <h2 class="section-title" data-en="{{ .Site.Params.ui.cases.title }}" data-ar="{{ .Site.Params.ar.ui.cases.title }}">{{ .Site.Params.ui.cases.title }}</h2>
+                <p class="section-subtitle" data-en="{{ .Site.Params.ui.cases.subtitle }}" data-ar="{{ .Site.Params.ar.ui.cases.subtitle }}">{{ .Site.Params.ui.cases.subtitle }}</p>
+            </div>
+            
+            <div class="cases-container">
+                {{ range .Site.Params.clinical_cases }}
+                    {{ if .enabled }}
+                        <div class="case-category">
+                            <h3 class="case-category-title" data-en="{{ .category }}" data-ar="{{ .category_ar }}">{{ .category }}</h3>
+                            <div class="cases-grid">
+                                {{ range .cases }}
+                                    <div class="case-card">
+                                        <div class="case-image-wrapper">
+                                            <img src="{{ .photo }}" alt="{{ .alt }}" data-alt-en="{{ .alt }}" data-alt-ar="{{ .alt_ar }}" class="case-image" loading="lazy">
+                                        </div>
+                                        <div class="case-description">
+                                            <p data-en="{{ .description }}" data-ar="{{ .description_ar }}">{{ .description }}</p>
+                                        </div>
+                                    </div>
+                                {{ end }}
+                            </div>
+                        </div>
+                    {{ end }}
+                {{ end }}
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section">
+            <div class="section-header">
+                <div class="icon-circle">
+                    <i class="fas fa-star"></i>
+                </div>
+                <h2 class="section-title" data-en="{{ .Site.Params.ui.testimonials.title }}" data-ar="{{ .Site.Params.ar.ui.testimonials.title }}">{{ .Site.Params.ui.testimonials.title }}</h2>
+                <p class="section-subtitle" data-en="{{ .Site.Params.ui.testimonials.subtitle }}" data-ar="{{ .Site.Params.ar.ui.testimonials.subtitle }}">{{ .Site.Params.ui.testimonials.subtitle }}</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                {{ range .Site.Params.testimonials.items }}
+                <article class="testimonial-card">
+                    <div class="testimonial-rating">
+                        {{ range seq .rating }}<i class="fas fa-star"></i>{{ end }}
+                    </div>
+                    <p class="testimonial-text" data-en="{{ .text }}" data-ar="{{ .text_ar }}">{{ .text }}</p>
+                    <div class="testimonial-author" data-en="{{ .name }}" data-ar="{{ .name_ar }}">{{ .name }}</div>
+                    <div class="testimonial-date">{{ .date }}</div>
+                </article>
+                {{ end }}
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="section-header">
+                <div class="icon-circle">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <h2 class="section-title" data-en="{{ .Site.Params.ui.about.title }}" data-ar="{{ .Site.Params.ar.ui.about.title }}">{{ .Site.Params.ui.about.title }}</h2>
+                <p class="section-subtitle" data-en="{{ .Site.Params.ui.about.subtitle }}" data-ar="{{ .Site.Params.ar.ui.about.subtitle }}">{{ .Site.Params.ui.about.subtitle }}</p>
+            </div>
+            
+            <div class="about-content">
+                {{ if .Site.Params.doctor.profile_image }}
+                <img src="{{ .Site.Params.doctor.profile_image }}" alt="{{ .Site.Params.doctor.name }}" class="about-image">
+                {{ end }}
+                <div class="about-info">
+                    <h3 data-en="{{ .Site.Params.doctor.name }}" data-ar="{{ .Site.Params.ar.doctor.name }}">{{ .Site.Params.doctor.name }}</h3>
+                    <p class="about-credentials" data-en="{{ .Site.Params.doctor.credentials }}" data-ar="{{ .Site.Params.ar.doctor.credentials }}">{{ .Site.Params.doctor.credentials }}</p>
+                    <p class="about-bio" data-en="{{ .Site.Params.doctor.bio }}" data-ar="{{ .Site.Params.ar.doctor.bio }}">{{ .Site.Params.doctor.bio }}</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="section-header">
+                <div class="icon-circle">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h2 class="section-title" data-en="{{ .Site.Params.ui.contact.title }}" data-ar="{{ .Site.Params.ar.ui.contact.title }}">{{ .Site.Params.ui.contact.title }}</h2>
+                <p class="section-subtitle" data-en="{{ .Site.Params.ui.contact.subtitle }}" data-ar="{{ .Site.Params.ar.ui.contact.subtitle }}">{{ .Site.Params.ui.contact.subtitle }}</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3 data-en="Contact Information" data-ar="معلومات التواصل">Contact Information</h3>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <strong data-en="{{ .Site.Params.ui.contact.address_label }}" data-ar="{{ .Site.Params.ar.ui.contact.address_label }}">{{ .Site.Params.ui.contact.address_label }}</strong>
+                            <p data-en="{{ .Site.Params.clinic.address.full_address }}" data-ar="{{ .Site.Params.ar.clinic.address.full_address }}">{{ .Site.Params.clinic.address.full_address }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <strong data-en="{{ .Site.Params.ui.contact.phone_label }}" data-ar="{{ .Site.Params.ar.ui.contact.phone_label }}">{{ .Site.Params.ui.contact.phone_label }}</strong>
+                            <p><a href="tel:{{ .Site.Params.contact.phone }}">{{ .Site.Params.contact.phone }}</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <strong data-en="{{ .Site.Params.ui.contact.email_label }}" data-ar="{{ .Site.Params.ar.ui.contact.email_label }}">{{ .Site.Params.ui.contact.email_label }}</strong>
+                            <p><a href="mailto:{{ .Site.Params.contact.email }}">{{ .Site.Params.contact.email }}</a></p>
+                        </div>
+                    </div>
+                    
+                    <h3 data-en="{{ .Site.Params.ui.contact.hours_label }}" data-ar="{{ .Site.Params.ar.ui.contact.hours_label }}" style="margin-top: 2rem;">{{ .Site.Params.ui.contact.hours_label }}</h3>
+                    <ul class="hours-list">
+                        <li><span data-en="Monday - Thursday" data-ar="الاثنين - الخميس">Monday - Thursday</span><span>09:00 - 21:00</span></li>
+                        <li><span data-en="Friday" data-ar="الجمعة">Friday</span><span>14:00 - 20:00</span></li>
+                        <li><span data-en="Saturday" data-ar="السبت">Saturday</span><span>10:00 - 18:00</span></li>
+                        <li><span data-en="Sunday" data-ar="الأحد">Sunday</span><span data-en="Closed" data-ar="مغلق">Closed</span></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps?q={{ .Site.Params.clinic.geo.latitude }},{{ .Site.Params.clinic.geo.longitude }}&hl=en&z=15&output=embed"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                    <a href="https://www.google.com/maps/search/?api=1&query={{ .Site.Params.clinic.geo.latitude }},{{ .Site.Params.clinic.geo.longitude }}" 
+                       target="_blank" class="btn btn-primary" style="width: 100%; margin-top: 1rem; justify-content: center;">
+                        <i class="fas fa-directions"></i>
+                        <span data-en="{{ .Site.Params.ui.contact.get_directions }}" data-ar="{{ .Site.Params.ar.ui.contact.get_directions }}">{{ .Site.Params.ui.contact.get_directions }}</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <nav class="footer-nav">
+                <a href="#home" data-en="{{ .Site.Params.ui.nav.home }}" data-ar="{{ .Site.Params.ar.ui.nav.home }}">{{ .Site.Params.ui.nav.home }}</a>
+                <a href="#services" data-en="{{ .Site.Params.ui.nav.services }}" data-ar="{{ .Site.Params.ar.ui.nav.services }}">{{ .Site.Params.ui.nav.services }}</a>
+                <a href="#cases" data-en="{{ .Site.Params.ui.nav.cases }}" data-ar="{{ .Site.Params.ar.ui.nav.cases }}">{{ .Site.Params.ui.nav.cases }}</a>
+                <a href="#contact" data-en="{{ .Site.Params.ui.nav.contact }}" data-ar="{{ .Site.Params.ar.ui.nav.contact }}">{{ .Site.Params.ui.nav.contact }}</a>
+            </nav>
+            
+            <div class="social-links">
+                {{ with .Site.Params.contact.social.instagram }}
+                <a href="{{ . }}" target="_blank" class="social-link instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                {{ end }}
+                {{ with .Site.Params.contact.social.facebook }}
+                <a href="{{ . }}" target="_blank" class="social-link facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                {{ end }}
+                {{ with .Site.Params.contact.social.linkedin }}
+                <a href="{{ . }}" target="_blank" class="social-link linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                {{ end }}
+            </div>
+            
+            <div class="footer-info">
+                <p>&copy; {{ now.Year }} <span data-en="{{ .Site.Params.clinic.name }}" data-ar="{{ .Site.Params.ar.clinic.name }}">{{ .Site.Params.clinic.name }}</span>. <span data-en="{{ .Site.Params.ui.footer.rights }}" data-ar="{{ .Site.Params.ar.ui.footer.rights }}">{{ .Site.Params.ui.footer.rights }}</span>.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/{{ replace .Site.Params.contact.whatsapp '+' '' }}" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="#home" class="bottom-nav-item active">
+            <i class="fas fa-home"></i>
+            <span data-en="{{ .Site.Params.ui.nav.home }}" data-ar="{{ .Site.Params.ar.ui.nav.home }}">{{ .Site.Params.ui.nav.home }}</span>
+        </a>
+        <a href="#services" class="bottom-nav-item">
+            <i class="fas fa-teeth"></i>
+            <span data-en="{{ .Site.Params.ui.nav.services }}" data-ar="{{ .Site.Params.ar.ui.nav.services }}">{{ .Site.Params.ui.nav.services }}</span>
+        </a>
+        <a href="#cases" class="bottom-nav-item">
+            <i class="fas fa-images"></i>
+            <span data-en="{{ .Site.Params.ui.nav.cases }}" data-ar="{{ .Site.Params.ar.ui.nav.cases }}">{{ .Site.Params.ui.nav.cases }}</span>
+        </a>
+        <a href="#testimonials" class="bottom-nav-item">
+            <i class="fas fa-star"></i>
+            <span data-en="{{ .Site.Params.ui.nav.testimonials }}" data-ar="{{ .Site.Params.ar.ui.nav.testimonials }}">{{ .Site.Params.ui.nav.testimonials }}</span>
+        </a>
+        <a href="#contact" class="bottom-nav-item">
+            <i class="fas fa-envelope"></i>
+            <span data-en="{{ .Site.Params.ui.nav.contact }}" data-ar="{{ .Site.Params.ar.ui.nav.contact }}">{{ .Site.Params.ui.nav.contact }}</span>
+        </a>
+    </nav>
+
+    <script>
+        // Language and Theme Management
+        let currentLang = 'en';
+        let currentTheme = localStorage.getItem('theme') || 'light';
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            initLanguage();
+            initNavigation();
+        });
+
+        // Theme Toggle
+        function initTheme() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const themeIcon = document.querySelector('#themeToggle i');
+            themeIcon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', currentTheme);
+            initTheme();
+        });
+
+        // Language Toggle
+        function initLanguage() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam === 'ar') currentLang = 'ar';
+            
+            document.body.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
+            updateI18nText();
+            updateI18nAlt();
+            
+            const langText = document.querySelector('.lang-text');
+            langText.textContent = currentLang === 'en' ? 'AR' : 'EN';
+        }
+
+        document.getElementById('langToggle').addEventListener('click', function() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            const newUrl = new URL(window.location);
+            newUrl.searchParams.set('lang', currentLang);
+            window.history.pushState({}, '', newUrl);
+            initLanguage();
+        });
+
+        function updateI18nText() {
+            document.querySelectorAll('[data-en][data-ar]').forEach(el => {
+                const enText = el.getAttribute('data-en');
+                const arText = el.getAttribute('data-ar');
+                if (enText && arText) {
+                    el.textContent = currentLang === 'en' ? enText : arText;
+                }
+            });
+        }
+
+        function updateI18nAlt() {
+            document.querySelectorAll('[data-alt-en][data-alt-ar]').forEach(el => {
+                const enAlt = el.getAttribute('data-alt-en');
+                const arAlt = el.getAttribute('data-alt-ar');
+                if (enAlt && arAlt) {
+                    el.setAttribute('alt', currentLang === 'en' ? enAlt : arAlt);
+                }
+            });
+        }
+
+        // Navigation
+        function initNavigation() {
+            const menuBtn = document.getElementById('menuBtn');
+            const closeBtn = document.getElementById('closeBtn');
+            const mobileNav = document.getElementById('mobileNav');
+            const navLinks = document.querySelectorAll('.nav-links a, .bottom-nav-item');
+            
+            menuBtn.addEventListener('click', () => mobileNav.classList.add('active'));
+            closeBtn.addEventListener('click', () => mobileNav.classList.remove('active'));
+            
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileNav.classList.remove('active');
+                    document.querySelectorAll('.bottom-nav-item').forEach(item => item.classList.remove('active'));
+                    if (this.classList.contains('bottom-nav-item')) this.classList.add('active');
+                });
+            });
+            
+            // Scroll spy
+            const sections = document.querySelectorAll('.section, .hero-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('.bottom-nav-item').forEach(item => {
+                            item.classList.remove('active');
+                            if (item.getAttribute('href') === `#${id}`) item.classList.add('active');
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            sections.forEach(section => observer.observe(section));
+        }
+    </script>
+</body>
+</html>

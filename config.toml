@@ -1,0 +1,434 @@
+baseURL = "https://portfoliohubs.github.io/MICKY/"
+defaultContentLanguage = "en"
+languageCode = "en-us"
+title = "Dr. Remonda Malak Dental Clinic"
+defaultContentLanguage = "en"
+
+[params]
+  # ==========================================
+  # CLINIC BUSINESS INFORMATION (GEO + SEO)
+  # ==========================================
+  [params.clinic]
+    name = "Dr. Remonda Malak Dental Clinic"
+    name_ar = "عيادة د. ريموندا ملاك لطب الأسنان"
+    tagline = "Your Smile, Our Passion"
+    tagline_ar = "ابتسامتك، شغفنا"
+    description = "Professional dental clinic in Zagazig offering cosmetic dentistry, restorative dentistry, endodontics, oral surgery, and comprehensive dental care. Book your appointment today."
+    description_ar = "عيادة أسنان احترافية في الزقازيق تقدم طب الأسنان التجميلي، ترميم الأسنان، علاج الجذور، جراحة الفم، ورعاية الأسنان الشاملة. احجز موعدك اليوم."
+    founding_date = "2026"
+    price_range = "$$"
+    payment_methods = ["Cash", "Credit Card", "Insurance"]
+    
+    [params.clinic.address]
+      street = "El-Gash Street"
+      city = "Zagazig"
+      region = "Sharqia"
+      postal_code = "44519"
+      country = "Egypt"
+      full_address = "El-Gash Street, Zagazig, Sharqia Governorate, Egypt"
+      full_address_ar = "شارع الجيش، الزقازيق، محافظة الشرقية، مصر"
+    
+    [params.clinic.geo]
+      latitude = "30.585070727964393"
+      longitude = "31.487296675825437"
+      map_url = "https://www.google.com/maps/search/?api=1&query=30.585070727964393,31.487296675825437"
+    
+    [params.clinic.hours]
+      monday = "09:00-21:00"
+      tuesday = "09:00-21:00"
+      wednesday = "09:00-21:00"
+      thursday = "09:00-21:00"
+      friday = "14:00-20:00"
+      saturday = "10:00-18:00"
+      sunday = "Closed"
+    
+    [params.clinic.rating]
+      rating_value = "4.9"
+      review_count = "127"
+
+  # ==========================================
+  # PRIMARY DOCTOR INFORMATION
+  # ==========================================
+  [params.doctor]
+    name = "Dr. Remonda Malak"
+    name_ar = "د. ريموندا ملاك"
+    title = "Dentist"
+    title_ar = "طبيبة أسنان"
+    credentials = "BDS, Faculty of Dentistry"
+    credentials_ar = "بكالوريوس طب الأسنان، كلية طب الأسنان"
+    graduation = "Graduated 2026 - Faculty of Dentistry, Zagazig University"
+    graduation_ar = "تخرج 2026 - كلية طب الأسنان، جامعة الزقازيق"
+    bio = "Dr. Remonda Malak is a dedicated dental professional committed to providing exceptional dental care with a gentle touch. Specializing in cosmetic and restorative dentistry."
+    bio_ar = "د. ريموندا ملاك هي أخصائية أسنان متفانية تلتزم بتقديم رعاية أسنان استثنائية بلمسة رقيقة. متخصصة في طب الأسنان التجميلي والترميمي."
+    profile_image = ""
+    profile_image_alt = "Dr. Remonda Malak - Dentist in Zagazig"
+    profile_image_alt_ar = "د. ريموندا ملاك - طبيبة أسنان في الزقازيق"
+    years_experience = "1"
+
+  # ==========================================
+  # SEO CONFIGURATION (100% OPTIMIZED)
+  # ==========================================
+  [params.seo]
+    # Primary Meta
+    description = "Dr. Remonda Malak Dental Clinic in Zagazig offers professional dental services including cosmetic dentistry, teeth whitening, dental implants, root canal treatment, and emergency dental care. Book online or call +201270014506."
+    description_ar = "عيادة د. ريموندا ملاك لطب الأسنان في الزقازيق تقدم خدمات أسنان احترافية تشمل طب الأسنان التجميلي، تبييض الأسنان، زراعة الأسنان، علاج الجذور، ورعاية الأسنان الطارئة. احجز أونلاين أو اتصل على +201270014506."
+    doctor_name_en = "Dr. Remonda Malak"
+    doctor_name_ar = "د. ريموندا ملاك"
+    site_name = "Dr. Remonda Malak Dental Clinic"
+    og_image = ""
+    og_image_alt = "Dr. Remonda Malak Dental Clinic - Zagazig"
+    favicon_image = ""
+    twitter_handle = ""
+    
+    # English Keywords - Local SEO Focused
+    keywords = [
+      "dentist Zagazig",
+      "dental clinic Zagazig",
+      "cosmetic dentistry Zagazig",
+      "best dentist in Zagazig",
+      "teeth whitening Zagazig",
+      "dental implants Egypt",
+      "root canal treatment Zagazig",
+      "emergency dentist Zagazig",
+      "pediatric dentist Zagazig",
+      "Dr Remonda Malak",
+      "dental clinic Sharqia",
+      "oral surgery Zagazig",
+      "dental crowns Zagazig",
+      "veneers Egypt",
+      "orthodontics Zagazig",
+      "braces Zagazig",
+      "dental cleaning Zagazig",
+      "tooth extraction Zagazig",
+      "dental filling Zagazig",
+      "gum treatment Zagazig",
+      "dental care Egypt",
+      "family dentist Zagazig",
+      "affordable dentist Zagazig",
+      "professional dental clinic",
+      "dentist near me",
+      "dental services Egypt",
+      "dental clinic near Zagazig University"
+    ]
+    
+    # Arabic Keywords
+    keywords_ar = [
+      "طبيب أسنان الزقازيق",
+      "عيادة أسنان الزقازيق",
+      "طب أسنان تجميلي الزقازيق",
+      "أفضل دكتور أسنان في الزقازيق",
+      "تبييض الأسنان الزقازيق",
+      "زراعة الأسنان مصر",
+      "علاج الجذور الزقازيق",
+      "طبيب أسنان طوارئ الزقازيق",
+      "طبيب أسنان أطفال الزقازيق",
+      "دكتور ريموندا ملاك",
+      "عيادة أسنان الشرقية",
+      "جراحة الفم الزقازيق",
+      "تركيبات أسنان الزقازيق",
+      "فينير الأسنان مصر",
+      "تقويم الأسنان الزقازيق",
+      "تنظيف الأسنان الزقازيق",
+      "خلع الأسنان الزقازيق",
+      "حشو الأسنان الزقازيق",
+      "علاج اللثة الزقازيق",
+      "رعاية الأسنان مصر",
+      "طبيب أسنان عائلي الزقازيق",
+      "دكتور أسنان رخيص الزقازيق",
+      "عيادة أسنان احترافية",
+      "دكتور أسنان قريب مني",
+      "خدمات أسنان مصر",
+      "عيادة أسنان قرب جامعة الزقازيق"
+    ]
+    
+    # Regional SEO
+    region = "Zagazig, Sharqia, Egypt"
+    placename = "Zagazig"
+    position = "30.585070727964393;31.487296675825437"
+    icbm = "30.585070727964393, 31.487296675825437"
+    geo_position = "30.585070727964393;31.487296675825437"
+    geo_region = "EG-SHR"
+    geo_placename = "Zagazig"
+
+  [params.integrations]
+    google_search_console_verification = "6VtKNI5qnSYsfjCTBMfnm9PuZjjR7aYh6crmofpS8yw"
+    google_analytics_measurement_id = ""
+
+  # ==========================================
+  # SERVICES (DENTAL TREATMENTS)
+  # ==========================================
+  [params.services]
+    [[params.services.list]]
+      id = "cosmetic"
+      icon = "fa-wand-magic-sparkles"
+      title = "Cosmetic Dentistry"
+      title_ar = "طب الأسنان التجميلي"
+      description = "Transform your smile with veneers, bonding, and aesthetic restorations"
+      description_ar = "حول ابتسامتك مع الفينير، والترابط، والترميمات الجمالية"
+      price_from = "500"
+      duration = "1-2 hours"
+      
+    [[params.services.list]]
+      id = "whitening"
+      icon = "fa-snowflake"
+      title = "Teeth Whitening"
+      title_ar = "تبييض الأسنان"
+      description = "Professional whitening for a brighter, more confident smile"
+      description_ar = "تبييض احترافي لابتسامة أكثر إشراقاً وثقة"
+      price_from = "800"
+      duration = "45 min"
+      
+    [[params.services.list]]
+      id = "implants"
+      icon = "fa-screwdriver-wrench"
+      title = "Dental Implants"
+      title_ar = "زراعة الأسنان"
+      description = "Permanent tooth replacement with state-of-the-art implant technology"
+      description_ar = "استبدال الأسنان الدائم بتقنية الزراعة المتطورة"
+      price_from = "3000"
+      duration = "2-3 sessions"
+      
+    [[params.services.list]]
+      id = "endodontics"
+      icon = "fa-heart-pulse"
+      title = "Root Canal Treatment"
+      title_ar = "علاج الجذور"
+      description = "Pain-free endodontic treatment to save your natural teeth"
+      description_ar = "علاج جذور خالٍ من الألم لإنقاذ أسنانك الطبيعية"
+      price_from = "600"
+      duration = "1-2 hours"
+      
+    [[params.services.list]]
+      id = "orthodontics"
+      icon = "fa-teeth"
+      title = "Orthodontics & Braces"
+      title_ar = "تقويم الأسنان والأطواق"
+      description = "Straighten your smile with modern braces and clear aligners"
+      description_ar = "قوّم ابتسامتك مع الأطواق الحديثة والتقويم الشفاف"
+      price_from = "5000"
+      duration = "12-24 months"
+      
+    [[params.services.list]]
+      id = "surgery"
+      icon = "fa-user-doctor"
+      title = "Oral Surgery"
+      title_ar = "جراحة الفم"
+      description = "Expert surgical procedures including extractions and wisdom teeth"
+      description_ar = "إجراءات جراحية متخصصة تشمل الخلع وضروس العقل"
+      price_from = "300"
+      duration = "30-60 min"
+      
+    [[params.services.list]]
+      id = "cleaning"
+      icon = "fa-sparkles"
+      title = "Professional Cleaning"
+      title_ar = "تنظيف احترافي"
+      description = "Deep cleaning and scaling for optimal oral health"
+      description_ar = "تنظيف عميق وتقشير للصحة الفموية المثلى"
+      price_from = "200"
+      duration = "30-45 min"
+      
+    [[params.services.list]]
+      id = "restorative"
+      icon = "fa-tooth"
+      title = "Restorative Dentistry"
+      title_ar = "ترميم الأسنان"
+      description = "Fillings, crowns, and bridges to restore your smile"
+      description_ar = "الحشوات، والتيجان، والجسور لاستعادة ابتسامتك"
+      price_from = "400"
+      duration = "1-2 hours"
+
+  # ==========================================
+  # UI TRANSLATIONS (ENGLISH)
+  # ==========================================
+  [params.ui]
+    [params.ui.nav]
+      home = "Home"
+      services = "Services"
+      cases = "Cases"
+      testimonials = "Reviews"
+      about = "About"
+      contact = "Contact"
+      book_now = "Book Now"
+      call_now = "Call Now"
+      
+    [params.ui.hero]
+      welcome = "Welcome to"
+      cta_book = "Book Appointment"
+      cta_services = "Our Services"
+      cta_call = "Call Now"
+      
+    [params.ui.services]
+      title = "Our Dental Services"
+      subtitle = "Comprehensive dental care for your entire family"
+      
+    [params.ui.cases]
+      title = "Before & After"
+      subtitle = "Real results from real patients"
+      
+    [params.ui.testimonials]
+      title = "What Our Patients Say"
+      subtitle = "Trusted by hundreds of patients in Zagazig"
+      
+    [params.ui.about]
+      title = "Meet Your Dentist"
+      subtitle = "Experienced, caring, and committed to your smile"
+      
+    [params.ui.contact]
+      title = "Get In Touch"
+      subtitle = "Ready to transform your smile? Contact us today"
+      address_label = "Address"
+      phone_label = "Phone"
+      email_label = "Email"
+      hours_label = "Opening Hours"
+      get_directions = "Get Directions"
+      
+    [params.ui.footer]
+      rights = "All rights reserved"
+
+  # ==========================================
+  # CLINICAL CASES / BEFORE & AFTER
+  # ==========================================
+  [[params.clinical_cases]]
+    enabled = true
+    category = "Composite Restorations"
+    category_ar = "حشوات الكومبوزيت"
+    
+    [[params.clinical_cases.cases]]
+      photo = "https://github.com/user-attachments/assets/88ac260c-b096-43f9-b1c9-6562cab78c95"
+      alt = "Before and after: Composite restoration for deep cavity class I"
+      alt_ar = "قبل وبعد: حشو كومبوزيت لتجويف عميق"
+      description = "Deep cavity restoration using premium composite materials"
+      description_ar = "ترميم تجويف عميق باستخدام مواد كومبوزيت ممتازة"
+      
+  [[params.clinical_cases]]
+    enabled = true
+    category = "Prosthodontics (Fixed & Removable)"
+    category_ar = "التركيبات الثابتة والمتحركة"
+    
+    [[params.clinical_cases.cases]]
+      photo = "https://github.com/user-attachments/assets/675de33a-263a-4f72-8d74-329c5783178a"
+      alt = "Before and after: Bridge for missing upper premolar"
+      alt_ar = "قبل وبعد: جسر لتعويض ضرس ضاحك علوي مفقود"
+      description = "Dental bridge to replace missing premolar tooth"
+      description_ar = "جسر أسنان لتعويض الضرس الضاحك المفقود"
+      
+    [[params.clinical_cases.cases]]
+      photo = "https://github.com/user-attachments/assets/8d9790d7-4370-4af2-a0c3-ceeba6290e80"
+      alt = "Before and after: Complete removable denture"
+      alt_ar = "قبل وبعد: طقم أسنان متحرك كامل"
+      description = "Full denture restoration for complete tooth replacement"
+      description_ar = "ترميم طقم كامل لاستبدال الأسنان بالكامل"
+      
+  [[params.clinical_cases]]
+    enabled = true
+    category = "Endodontics (Root Canal)"
+    category_ar = "علاج الجذور"
+    
+    [[params.clinical_cases.cases]]
+      photo = "https://github.com/user-attachments/assets/9de9a889-a2ce-479d-8c8d-9965ab98c6a1"
+      alt = "Before and after: Endodontic treatment for upper lateral incisor"
+      alt_ar = "قبل وبعد: حشو عصب للقاطع الجانبي العلوي"
+      description = "Successful root canal treatment saving natural tooth"
+      description_ar = "علاج ناجي للجذور يحفظ السن الطبيعي"
+
+  # ==========================================
+  # TESTIMONIALS / PATIENT REVIEWS
+  # ==========================================
+  [params.testimonials]
+    enabled = true
+    [[params.testimonials.items]]
+      name = "Ahmed Hassan"
+      name_ar = "أحمد حسن"
+      rating = 5
+      text = "Best dental experience ever! Dr. Remonda is so gentle and professional. My smile has never looked better."
+      text_ar = "أفضل تجربة أسنان على الإطلاق! د. ريموندا رقيقة جداً ومحترفة. ابتسامتي لم تبدو أبداً أفضل من هذا."
+      date = "2026-01-15"
+      
+    [[params.testimonials.items]]
+      name = "Fatima Al-Sayed"
+      name_ar = "فاطمة السيد"
+      rating = 5
+      text = "The clinic is modern and clean. I got my veneers done here and couldn't be happier with the results!"
+      text_ar = "العيادة حديثة ونظيفة. عملت الفينير هنا ولا يمكن أن أكون أكثر سعادة بالنتائج!"
+      date = "2026-02-20"
+      
+    [[params.testimonials.items]]
+      name = "Mohamed Ibrahim"
+      name_ar = "محمد إبراهيم"
+      rating = 5
+      text = "Finally found a dentist I can trust. The root canal treatment was completely painless. Highly recommend!"
+      text_ar = "أخيراً وجدت طبيب أسنان يمكنني الوثوق به. علاج الجذور كان خالياً تماماً من الألم. أنصح بشدة!"
+      date = "2026-03-10"
+
+  # ==========================================
+  # CONTACT INFORMATION
+  # ==========================================
+  [params.contact]
+    phone = "+201270014506"
+    whatsapp = "+201270014506"
+    email = "contact@drremondamalak.com"
+    
+    [params.contact.social]
+      instagram = "https://www.instagram.com/michaelnabilofficial/"
+      facebook = "https://www.facebook.com/Micky1000000"
+      linkedin = "https://linkedin.com/in/yourprofile"
+
+# Arabic Translations
+[params.ar]
+  [params.ar.clinic]
+    name = "عيادة د. ريموندا ملاك لطب الأسنان"
+    tagline = "ابتسامتك، شغفنا"
+    description = "عيادة أسنان احترافية في الزقازيق تقدم طب الأسنان التجميلي، ترميم الأسنان، علاج الجذور، جراحة الفم، ورعاية الأسنان الشاملة. احجز موعدك اليوم."
+
+  [params.ar.doctor]
+    name = "د. ريموندا ملاك"
+    title = "طبيبة أسنان"
+    credentials = "بكالوريوس طب الأسنان، كلية طب الأسنان"
+    graduation = "تخرج 2026 - كلية طب الأسنان، جامعة الزقازيق"
+    bio = "د. ريموندا ملاك هي أخصائية أسنان متفانية تلتزم بتقديم رعاية أسنان استثنائية بلمسة رقيقة. متخصصة في طب الأسنان التجميلي والترميمي."
+
+  [params.ar.ui]
+    [params.ar.ui.nav]
+      home = "الرئيسية"
+      services = "خدماتنا"
+      cases = "الحالات"
+      testimonials = "الآراء"
+      about = "عنّا"
+      contact = "تواصل"
+      book_now = "احجز الآن"
+      call_now = "اتصل الآن"
+      
+    [params.ar.ui.hero]
+      welcome = "مرحباً بك في"
+      cta_book = "احجز موعد"
+      cta_services = "خدماتنا"
+      cta_call = "اتصل الآن"
+      
+    [params.ar.ui.services]
+      title = "خدماتنا الطبية"
+      subtitle = "رعاية أسنان شاملة لعائلتك بالكامل"
+      
+    [params.ar.ui.cases]
+      title = "قبل وبعد"
+      subtitle = "نتائج حقيقية من مرضى حقيقيين"
+      
+    [params.ar.ui.testimonials]
+      title = "ماذا يقول مرضانا"
+      subtitle = "موثوق به من مئات المرضى في الزقازيق"
+      
+    [params.ar.ui.about]
+      title = "تعرف على طبيبتك"
+      subtitle = "ذات خبرة، تهتم، وتلتزم بابتسامتك"
+      
+    [params.ar.ui.contact]
+      title = "تواصل معنا"
+      subtitle = "مستعد لتحويل ابتسامتك؟ تواصل معنا اليوم"
+      address_label = "العنوان"
+      phone_label = "الهاتف"
+      email_label = "البريد الإلكتروني"
+      hours_label = "ساعات العمل"
+      get_directions = "احصل على الاتجاهات"
+      
+    [params.ar.ui.footer]
+      rights = "جميع الحقوق محفوظة"
